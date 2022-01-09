@@ -28,7 +28,7 @@ class OrderRepository extends Order implements OrderInterface
 	public function __construct()
 	{
 		$this->applyCoupon(new NullCoupon());
-		parent::__construct();
+		//parent::__construct();
 	}
 
 	public static function make(array $data)

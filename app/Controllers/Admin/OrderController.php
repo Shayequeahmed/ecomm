@@ -1,6 +1,10 @@
-<?php 
+<?php
+
 namespace App\Controllers\Admin;
+
+use App\Config;
 use Fantom\Controller;
+use App\Support\BillGenerator;
 use App\Middlewares\AdminAuthMiddleware;
 use App\EComm\Repositories\OrderRepository;
 use App\EComm\Repositories\OrderItemRepository;
@@ -34,6 +38,26 @@ class OrderController extends Controller
 			"order" => $order,
 			"order_items" => $items,
 		]);
+	}
+
+	protected function downloadBill()
+	{
+		if (!isset($this->route_params['id'])) {
+			Session::flash('error', 'Order id required');
+			redirect('admin/order/index');
+		}
+
+		$order_id = (int) $this->route_params['id'];
+		if (is_null($order = OrderRepository::find($order_id))) {
+			Session::flash('error', "Order does not exist with id '{$order->id}'");
+			redirect('admin/order/index');
+		}
+
+		$brandColor = Config::get('brand_color');
+		$logo = ROOT . '/public/assets/img/logo.jpeg';
+
+		$invoice = new BillGenerator($order,$logo, $brandColor);
+		$invoice->toPDF()->download();
 	}
 
 	protected function before()

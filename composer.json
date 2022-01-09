@@ -11,6 +11,7 @@
 	"require": {
 		"php": ">=7.0",
 		"imskm/fantom": "dev-development",
+		"konekt/pdf-invoice": "^1.10",
 		"phpunit/phpunit": "^9.5",
 		"razorpay/razorpay": "2.*"
 	},

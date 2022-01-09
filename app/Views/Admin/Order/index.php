@@ -73,6 +73,7 @@
                       <td>
                         <a href="/admin/order/<?= e($order->id) ?>/edit"><i class="far fa-edit"></i></a>
                         <a href="#"><i class="far fa-trash-alt"></i></a>
+                        <a href="/admin/order/<?= e($order->id) ?>/download-bill"><i class="fas fa-download"></i></a>
                       </td>
 
                     </tr>
