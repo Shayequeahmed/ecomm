@@ -71,7 +71,6 @@
             </div>
           </div>
         </div>
-        <?php foreach ($order_items as $oi): ?>
         <div class="row">
           <div class="col-12">
             <div class="card">
@@ -93,6 +92,7 @@
                     </tr>
                   </thead>
                   <tbody>
+                    <?php foreach ($order_items as $oi): ?>
                       <tr>
                         <td><?= $oi->product()->code ?></td>
                         <td><?= $oi->product()->title ?></td>
@@ -102,6 +102,7 @@
                         <td><?= $oi->size()->size ?></td>
                         <td><?= $oi->qty ?></td>
                       </tr>
+                    <?php endforeach; ?>
                   </tbody>
                 </table>
               </div>
@@ -110,7 +111,6 @@
             <!-- /.card -->
           </div>
         </div>
-        <?php endforeach; ?>
       </div>
   </section>
 </div>

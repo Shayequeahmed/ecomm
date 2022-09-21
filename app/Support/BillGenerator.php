@@ -56,9 +56,11 @@ class BillGenerator
 		// @TODO Handle coupon discount
 		foreach ($order_items as $oi) {
 			$product = $oi->product();
+			$color = $oi->color();
+			$size = $oi->size();
 			$this->invoice->addItem(
 				$product->title,
-				$product->description,
+				'Color:'. $color->color.'- Size:'.$size->size,
 				$oi->qty,
 				false,
 				$oi->price_mp,

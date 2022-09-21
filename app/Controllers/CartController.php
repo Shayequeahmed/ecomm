@@ -29,16 +29,18 @@ class CartController extends Controller
 		// @TODO Validate, duplicate assignment $color_id
 		// cleanup $_POST variable
 		// Out of stock product can not be added in the cart
-		$product_id = $_POST['product_id'];
-		$qty = $_POST['qty'];
-		$color_id = $_POST['color_id'];
-		$size_id = $_POST['size_id'];
-		$qty = (int) $_POST['qty'];
+		$v =  new CartValidator();
+		$v->validatAddItem();
+		if ($v->hasError()) {
+			redirect('cart/checkout');
+		}
+		
 		$product_id = (int) $_POST['product_id'];
-		$size_id = (int) $_POST['size_id'];
-		$color_id = (int) $_POST['color_id'];
-		$user_id = Auth::userId();
-		$cart = CartRepository::byUserId($user_id)->first();
+		$size_id 	= (int) $_POST['size_id'];
+		$color_id 	= (int) $_POST['color_id'];
+		$user_id 	= Auth::userId();
+		$qty 		= (int) $_POST['qty'];
+		$cart 		= CartRepository::byUserId($user_id)->first();
 		if (is_null($cart)) {
 			$cart = CartRepository::make([
 				"user_id" => $user_id,
